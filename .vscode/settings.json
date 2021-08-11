@@ -1,0 +1,18 @@
+{
+    "cSpell.words": [
+        "Funko",
+        "Funkos",
+        "openapi"
+    ],
+    "cSpell.language": "en,en-GB,en-US",
+    "markdownlint.config": {
+        "no-inline-html": {
+            "allowed_elements": [
+                "a",
+                "sup"
+            ]
+        }
+    },
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+}

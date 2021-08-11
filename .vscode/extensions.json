@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "cschleiden.vscode-github-actions",
+        "vector-of-bool.gitflow",
+        "streetsidesoftware.code-spell-checker",
+        "codezombiech.gitignore",
+        "github.vscode-pull-request-github",
+        "vscode-icons-team.vscode-icons",
+        "42crunch.vscode-openapi",
+        "zainchen.json",
+        "davidanson.vscode-markdownlint"
+    ]
+}

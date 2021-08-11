@@ -1,0 +1,439 @@
+openapi: '3.0.2'
+info:
+  title: Funko Locator API
+  version: '1.0.0'
+  description: Api that will support the Funko Locator
+
+tags:
+
+  - name: Item Management
+  - name: Category Management
+  - name: System
+
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/jmtvms/FunkoLocatorAPI/1.0.0
+
+
+paths:
+  /:
+    get:
+      operationId: GetSystemInformation
+      tags:
+        - System
+      summary: System Information
+      responses:
+        200:
+          description: Current information about the API
+          content:
+            application/json:
+              schema:
+                $ref:  "#/components/schemas/apiInfo"
+
+  /items:
+    get:
+      tags:
+        - Item Management
+      operationId: ListItems
+      description: Get a list of items.
+      parameters: 
+        - $ref: "#/components/parameters/pageQuery"
+        - $ref: "#/components/parameters/pageSizeQuery"
+          
+      responses:
+        200:
+          description: A list of items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/itemsList'
+      summary: Get a paged items list
+    post:
+      tags:
+          - Item Management
+      operationId: PostItem
+      summary: Create a new item
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/item"
+
+      responses:
+        201:
+          description: Item created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/itemWithLinks'
+
+  /items/{id}:
+    get:
+      tags:
+          - Item Management
+      operationId: GetItem
+      summary: Get item information
+      parameters: 
+        - $ref: "#components/parameters/uuidInPath"
+      responses:
+        200:
+          description: Item information
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/itemWithLinks'
+          links:
+            category:
+              $ref: "#/components/links/getCategoryFromItem"
+    put: 
+      tags:
+          - Item Management
+      operationId: PutItem
+      summary: Update an item
+      parameters: 
+        - $ref: "#components/parameters/uuidInPath"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/item"
+      responses:
+        201:
+          description: Item updated
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/itemWithLinks'
+          links:
+            category:
+              $ref: "#/components/links/getCategoryFromItem"
+            
+  /categories:
+    get:
+      tags:
+          - Category Management
+      operationId: ListCategory
+      summary: Get a paged list of categories
+      responses:
+        200:
+          description: Ok
+    post:
+      tags:
+          - Category Management
+      operationId: Create category
+      summary: Get a paged list of categories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/category"
+      responses:
+        201:
+          description: Category created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/categoryWithLinks"
+
+  /categories/{categoryId}:
+    get:
+      tags:
+          - Category Management
+      operationId: GetCategory
+      summary: Get a category information
+      parameters:
+        - in: path
+          name: categoryId
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 123e4567-e89b-12d3-a456-426614174000
+      responses:
+        200:
+          description: Category information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/categoryWithLinks'
+          links:
+            parentCategory:
+              $ref: "#/components/links/getParentCategoryFromCategory"
+    put:
+      tags:
+          - Category Management
+      operationId: PutCategory
+      summary: Update a category
+      parameters:
+        - $ref: "#components/parameters/uuidInPath"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/category"
+      responses:
+        200:
+          description: Category updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/categoryWithLinks'
+          links:
+            parentCategory:
+              $ref: "#/components/links/getParentCategoryFromCategory"
+    delete:
+      tags:
+          - Category Management
+      operationId: DeleteCategory
+      summary: Delete a category
+      parameters:
+        - $ref: "#components/parameters/uuidInPath"
+      responses:
+        200:
+          description: Category deleted
+
+        
+
+
+
+          
+            
+components:
+
+  links:
+    getCategoryFromItem:
+      operationId: GetCategory
+      parameters:
+        id: $response.body#/category/categoryId
+
+    getParentCategoryFromCategory:
+      operationId: GetCategory
+      parameters:
+        id: $response.body#/parentCategoryId
+      
+
+  parameters:
+
+    pageQuery:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+
+    pageSizeQuery:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 5
+        maximum: 200
+        default: 20
+
+    uuidInPath:
+      name: id
+      in: path
+      description: Unique identifier
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 123e4567-e89b-12d3-a456-426614174000
+
+
+
+
+
+
+  schemas:
+
+    baseItem:
+      type: object
+      description: A Funko unit
+      properties:
+        id:
+          title: Item unique identifier
+          type: string
+          format: uuid
+          example: 123e4567-e89b-12d3-a456-426614174000
+          nullable: false
+        itemNumber:
+          title: The Funko item number
+          type: number
+          example: 35519
+          nullable: false
+        name:
+          title: Name of the Item
+          type: string
+          example: DARTH VADER LIGHTS & SOUND - STAR WARS
+          nullable: false
+        boxNumber:
+          title: Number on item box
+          type: string
+          example: 343
+          nullable: false
+
+    itemChange:
+      allOf:
+        - $ref: "#/components/schemas/baseItem"
+        - type: object
+          properties:
+            categoryId:
+              type: string
+              format: uuid
+
+
+
+    item:
+      allOf:
+        - $ref: "#/components/schemas/baseItem"
+        - type: object
+          properties:
+            category:
+              $ref: "#/components/schemas/category"
+      required:
+        - id
+        - itemNumber
+        - name
+
+    itemWithLinks:
+      allOf:
+        - $ref: '#/components/schemas/item'
+        - type: object
+          properties:
+            links:
+              type: object
+              properties:
+                category:
+                  type: string
+                  format: uri
+                  readOnly: true
+                  example: "/category/f500b7f2-c4d3-4c72-9638-420e78a03ab9"
+                  
+    itemsList:
+      allOf:
+        - type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/itemWithLinks'
+        - $ref: '#/components/schemas/paging'
+          
+
+    type:
+      description: Item type
+      type: object
+      properties:
+        id:
+          title: Type unique identifier
+          type: string
+          format: uuid
+          example: f500b7f2-c4d3-4c72-9638-420e78a03ab9
+          nullable: false
+        name:
+          title: Type name
+          type: string
+          example: Pop!
+          nullable: false
+      required:
+        - id
+        - name
+
+    categoryId:
+      type: object
+      properties:
+        categoryId:
+          title: Category unique identifier
+          type: string
+          format: uuid
+          example: f500b7f2-c4d3-4c72-9638-420e78a03ab9
+          nullable: false
+      required:
+        - categoryId
+
+    category:
+      description: Item category
+      allOf:
+        - $ref:  "#/components/schemas/categoryId"
+        - type: object
+          properties:
+            parentCategoryId:
+              title: Parent category unique identifier
+              type: string
+              format: uuid
+              example: f500b7f2-c4d3-4c72-9638-420e78a03ab9
+              nullable: false
+            name:
+              title: Category name
+              type: string
+              example: StarWars
+              nullable: false
+          required:
+            - id
+            - name
+
+    categoryWithLinks:
+      allOf:
+       - $ref: "#/components/schemas/category"
+       - type: object
+         properties:
+          links:
+            type: object
+            properties:
+              parentCategory:
+                type: string
+                format: uri
+                readOnly: true
+                example: "/category/f500b7f2-c4d3-4c72-9638-420e78a03ab9"
+
+
+    apiInfo:
+      type: object
+      description: Information about the API
+      properties:
+        Name:
+          type: string
+          example: Funko Locator API
+        Version:
+          type: string
+          example: 1.0.0
+
+    paging:
+      type: object
+      properties:
+        pages:
+          type: integer
+          example: 120
+        page:
+          type: integer
+          example: 1
+        pageSize:
+          type: integer
+          example: 10
+
+        links:
+          type: object
+          properties:
+            previewsPage:
+              type: string
+              format: uri
+              example: ./?page=0&pageSize=10
+            nextPage:
+              type: string
+              format: uri
+              example: ./?page=2&pageSize=10
+            currentPage:
+              type: string
+              format: uri
+              example: ./?page=1&pageSize=10
