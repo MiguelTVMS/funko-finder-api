@@ -14,5 +14,8 @@
         }
     },
     "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "omnisharp.defaultLaunchSolution": "FunkoFinder.sln",
+    "omnisharp.enableRoslynAnalyzers": true,
+    "omnisharp.enableImportCompletion": true
 }

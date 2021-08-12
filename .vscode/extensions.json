@@ -8,6 +8,8 @@
         "vscode-icons-team.vscode-icons",
         "42crunch.vscode-openapi",
         "zainchen.json",
-        "davidanson.vscode-markdownlint"
+        "davidanson.vscode-markdownlint",
+        "ms-dotnettools.csharp",
+        "leo-labs.dotnet"
     ]
 }
