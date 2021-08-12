@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkoFinder.Api", "src\Funk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkoFinder.Api.Models", "src\FunkoFinder.Api.Models\FunkoFinder.Api.Models.csproj", "{9D12CB03-A825-4797-B43A-038C9B8B86D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkoFinder.Api.Common", "src\FunkoFinder.Api.Common\FunkoFinder.Api.Common.csproj", "{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,9 +48,22 @@ Global
 		{9D12CB03-A825-4797-B43A-038C9B8B86D7}.Release|x64.Build.0 = Release|Any CPU
 		{9D12CB03-A825-4797-B43A-038C9B8B86D7}.Release|x86.ActiveCfg = Release|Any CPU
 		{9D12CB03-A825-4797-B43A-038C9B8B86D7}.Release|x86.Build.0 = Release|Any CPU
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}.Debug|x64.Build.0 = Debug|Any CPU
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}.Debug|x86.Build.0 = Debug|Any CPU
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}.Release|x64.ActiveCfg = Release|Any CPU
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}.Release|x64.Build.0 = Release|Any CPU
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}.Release|x86.ActiveCfg = Release|Any CPU
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FC01C5E7-1537-4B0B-BE6A-55FB7BF67070} = {21404E62-D93F-417C-81CE-E51202E3A38A}
 		{9D12CB03-A825-4797-B43A-038C9B8B86D7} = {21404E62-D93F-417C-81CE-E51202E3A38A}
+		{3EADB4CC-0AC0-4BC7-81FF-8DFC0BBD84F1} = {21404E62-D93F-417C-81CE-E51202E3A38A}
 	EndGlobalSection
 EndGlobal

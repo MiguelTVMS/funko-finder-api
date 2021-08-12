@@ -10,6 +10,10 @@
         "zainchen.json",
         "davidanson.vscode-markdownlint",
         "ms-dotnettools.csharp",
-        "leo-labs.dotnet"
+        "leo-labs.dotnet",
+        "selcukermaya.se-csproj-extensions",
+        "fudge.auto-using",
+        "k--kato.docomment",
+        "aliasadidev.nugetpackagemanagergui"
     ]
 }

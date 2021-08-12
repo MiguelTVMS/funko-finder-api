@@ -1,15 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
-
+  <PropertyGroup Condition="$(Configuration) == 'Debug'">
+    <BumpLabel>dev</BumpLabel>
+    <BumpLabelDigits>4</BumpLabelDigits>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration) == 'Release'">
+    <BumpRevision>True</BumpRevision>
+    <BumpResetLabel>dev</BumpResetLabel>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.2" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\FunkoFinder.Api.Models\FunkoFinder.Api.Models.csproj" />
+    <ProjectReference Include="..\FunkoFinder.Api.Common\FunkoFinder.Api.Common.csproj" />
   </ItemGroup>
-
 </Project>
